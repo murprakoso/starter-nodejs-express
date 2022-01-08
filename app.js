@@ -5,6 +5,9 @@ const morgan = require("morgan");
 const app = express();
 const port = 5000;
 
+// Import routes
+const webRoutes = require("./routes/web");
+
 // Static Files
 app.use(express.static("public"));
 
@@ -19,19 +22,7 @@ app.use(
 );
 
 // Routes
-app.get("/", (req, res) => {
-  let data = {
-    title: "Home Page",
-  };
-  res.render("pages/index", data);
-});
-
-app.get("/about", (req, res) => {
-  let data = {
-    title: "About Page",
-  };
-  res.render("pages/about", data);
-});
+app.use(webRoutes);
 
 // Listen port
 app.listen(port, () => {
